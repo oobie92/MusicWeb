@@ -1,0 +1,166 @@
+Instalando dependencias:
+
+express:
+	- Framework para hacer API Rest sobre NodeJS, trabaja con protocolo HTTP.
+	
+bcript-nodejs:
+	- Libreria para encriptar contrasenas, las pass se guardan encriptadas.
+	
+body-parser:
+	- Parsea las peticiones recibidas por POST, parsealo a Jason y todos los datos recibidos se convierten en objetos.
+	
+connect-multiparty:
+	- Permite subir ficheros por files, utilizando peticiones http (con NodeJS), y los formularios pueden tener un multi party y enviar datos a la API
+	  guardandose en el servidor.
+
+jwt-simple:
+	- Libreria para la autentificacion con tokens.
+
+moment:
+	- Parse, validate, manipulate, and display dates and times in JavaScript.
+
+mongoose:
+	- Networking library with functions including TCP, HTTP client and server, WebSocket client and server, MQTT client and broker and much more.
+	
+mongoose-pagination:
+	- Hacer paginaciones.
+
+nodemon:
+	- Is a utility that will monitor for any changes in your source and automatically restart your server. Perfect for development	
+
+
+Installation with cygdrive:
+
+- Go to API Rest location\
+
+MGN04908@GTIBLPTOSE4908 ~
+$ mean2
+
+MGN04908@GTIBLPTOSE4908 /cygdrive/c/www/mean2
+$ cd api
+
+MGN04908@GTIBLPTOSE4908 /cygdrive/c/www/mean2/api
+$ npm init
+This utility will walk you through creating a package.json file.
+It only covers the most common items, and tries to guess sensible defaults.
+
+See `npm help json` for definitive documentation on these fields
+and exactly what they do.
+
+Use `npm install <pkg>` afterwards to install a package and
+save it as a dependency in the package.json file.
+
+Press ^C at any time to quit.
+package name: (api)
+version: (1.0.0)
+description: Proyecto de API Rest con NodeJS para Mean2
+entry point: (index.js)
+test command:
+git repository:
+keywords:
+author: Diego Mendez
+license: (ISC) MIT
+About to write to C:\www\mean2\api\package.json:
+
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "Proyecto de API Rest con NodeJS para Mean2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Diego Mendez",
+  "license": "MIT"
+}
+
+
+Is this ok? (yes) yes
+
+MGN04908@GTIBLPTOSE4908 /cygdrive/c/www/mean2/api
+$ ls
+package.json
+
+MGN04908@GTIBLPTOSE4908 /cygdrive/c/www/mean2/api
+$ npm install express --save
+npm notice created a lockfile as package-lock.json. You should commit this file.
+npm WARN api@1.0.0 No repository field.
+
++ express@4.16.2
+added 49 packages in 15.571s
+
+MGN04908@GTIBLPTOSE4908 /cygdrive/c/www/mean2/api
+$ npm install bcrypt-nodejs --save
+npm WARN api@1.0.0 No repository field.
+
++ bcrypt-nodejs@0.0.3
+added 1 package in 1.58s
+
+MGN04908@GTIBLPTOSE4908 /cygdrive/c/www/mean2/api
+$ npm install body-parser --save
+npm WARN api@1.0.0 No repository field.
+
++ body-parser@1.18.2
+updated 1 package in 1.583s
+
+MGN04908@GTIBLPTOSE4908 /cygdrive/c/www/mean2/api
+$ npm install connect-multiparty --save
+npm WARN api@1.0.0 No repository field.
+
++ connect-multiparty@2.1.0
+added 4 packages in 2.112s
+
+MGN04908@GTIBLPTOSE4908 /cygdrive/c/www/mean2/api
+$ npm install jtw-simple --save
+npm ERR! code E404
+npm ERR! 404 Not Found: jtw-simple@latest
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     C:\Users\mgn04908\AppData\Roaming\npm-cache\_logs\2018-02-06T23_15_59_885Z-debug.log
+
+MGN04908@GTIBLPTOSE4908 /cygdrive/c/www/mean2/api
+$ npm install jwt-simple --save
+npm WARN api@1.0.0 No repository field.
+
++ jwt-simple@0.5.1
+added 1 package in 1.617s
+
+MGN04908@GTIBLPTOSE4908 /cygdrive/c/www/mean2/api
+$ npm install moment --save
+npm WARN api@1.0.0 No repository field.
+
++ moment@2.20.1
+added 1 package in 5.724s
+
+MGN04908@GTIBLPTOSE4908 /cygdrive/c/www/mean2/api
+$ npm install mongoose --save
+npm WARN api@1.0.0 No repository field.
+
++ mongoose@5.0.3
+added 18 packages in 14.512s
+
+MGN04908@GTIBLPTOSE4908 /cygdrive/c/www/mean2/api
+$ npm install mongoose-pagination --save
+npm WARN api@1.0.0 No repository field.
+
++ mongoose-pagination@1.0.0
+added 1 package in 1.847s
+
+MGN04908@GTIBLPTOSE4908 /cygdrive/c/www/mean2/api
+$ npm install nodemon --save-dev
+
+> nodemon@1.14.12 postinstall C:\www\mean2\api\node_modules\nodemon
+> node -e "console.log('\u001b[32mLove nodemon? You can now support the project via the open collective:\u001b[22m\u001b[39m\n > \u001b[96m\u001b[1mhttps://opencollective.com/nodemon/donate\u001b[0m\n')" || exit 0
+
+Love nodemon? You can now support the project via the open collective:
+ > https://opencollective.com/nodemon/donate
+
+npm WARN api@1.0.0 No repository field.
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.1.3 (node_modules\fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.1.3: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"})
+
++ nodemon@1.14.12
+added 240 packages in 71.027s
+
+MGN04908@GTIBLPTOSE4908 /cygdrive/c/www/mean2/api
+$
