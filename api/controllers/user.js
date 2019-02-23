@@ -15,18 +15,19 @@ function test(req, res){
 function saveUser(req, res){
     const user = new User();
 
-    const params = req.body;
+    const { body } = req;
 
-        console.log(params);
-        user.name = params.name;
-        user.surname = params.surname;
-        user.email = params.email;
-        user.role = 'ROLE_ADMIN';
+        console.log(body);
+        // console.log(req);
+        user.name = body.name;
+        user.surname = body.surname;
+        user.email = body.email;
+        user.role = 'ROLE_USER';
         user.image = 'null';
 
-        if(params.password){
+        if(body.password){
             //Encript pass
-            bcrypt.hash(params.password, null, null, (err, hash) => {
+            bcrypt.hash(body.password, null, null, (err, hash) => {
                 user.password = hash;
                 if(user.name != null && user.surname != null
                 && user.email != null){
@@ -54,10 +55,10 @@ function saveUser(req, res){
 }
 
 function loginUser(req, res){
-    const params = req.body;
+    const { body } = req;
 
-    const email = params.email;
-    const password = params.password;
+    const email = body.email;
+    const password = body.password;
 
         User.findOne({email: email.toLowerCase()}, (err, user) => {
             if(err){
@@ -70,7 +71,7 @@ function loginUser(req, res){
                     bcrypt.compare(password, user.password, (err, check) => {
                         if(check){
                             //Return users info logged in
-                            if(params.gethash){
+                            if(body.gethash){
                                 //Return jwt token
                                 res.status(200).send({
                                   token: jwt.createToken(user)
@@ -120,7 +121,8 @@ function uploadImage(req, res){
 
   if(req.files){
     const file_path = req.files.image.path;
-    const file_split = file_path.split('\\');
+    console.log(req.files.image.path);
+    const file_split = file_path.split('/');
     file_name = file_split[2];
     const ext_split = file_name.split('\.');
     const file_ext = ext_split[1] ;

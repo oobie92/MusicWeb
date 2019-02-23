@@ -9,6 +9,7 @@ const md_upload = multipart({ uploadDir: './uploads/users' });
 const api = express.Router();
 
 api.get('/test-controller', md_auth.ensureAuth, UserController.test);
+// api.get('/test-controller',  UserController.test);
 api.post('/register', UserController.saveUser);
 api.post('/login', UserController.loginUser);
 // api.patch('/update-user/:id', md_auth.ensureAuth, UserController.updateUser);

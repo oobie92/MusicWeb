@@ -2,7 +2,7 @@
 
 const jwt = require('jwt-simple');
 const moment = require('moment');
-const secret = 'clave_secreta_curso';
+const secret = 'mean2';
 
 exports.ensureAuth = (req, res, next) => {
     if(!req.headers.authorization){
@@ -10,15 +10,17 @@ exports.ensureAuth = (req, res, next) => {
     }
 
     const token = req.headers.authorization.replace(/['"]+/g, ''); //Replace  ' & "
+    // console.log(token)
+    let payload;
 
     try{
-        const payload = jwt.decode(token, secret);
+        payload = jwt.decode(token, secret);
 
         if(payload.exp <= moment().unix()){
             return res.status(401).send({message: 'Token has expired'});
         }
     }catch(ex){
-      //  console.log(ex);
+    //    console.log(ex);
         return res.status(404).send({message: 'Invalid Token'});
     }
 

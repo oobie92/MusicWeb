@@ -113,10 +113,11 @@ function deleteSong(req, res){
 function uploadFile(req, res){
     const songId = req.params.id;
     let file_name = 'Not uploaded...';
+    console.log(songId)
 
   if(req.files){
     const file_path = req.files.file.path;
-    const file_split = file_path.split('\\');
+    const file_split = file_path.split('\/');
     file_name = file_split[2];
     const ext_split = file_name.split('\.');
     const file_ext = ext_split[1] ;
@@ -126,6 +127,7 @@ function uploadFile(req, res){
         if(file_ext.toLowerCase() == 'mp3' || file_ext == 'wav'){
             Song.findByIdAndUpdate(songId, {file: file_name}, (err, songUpdated) => {
               if(!songUpdated){
+                  console.log(err)
                 res.status(404).send({message: "Couldn't update song"});
               }else{
                 res.status(200).send({song: songUpdated});

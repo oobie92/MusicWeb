@@ -27,10 +27,11 @@ function getArtist(req, res){
 }
 
 function getArtists(req, res){
+  let page;
     if(req.params.page){
-    const page = req.params.page;
+    page = req.params.page;
   }else{
-    const page = 1
+    page = 1
   }
     const  itemsPerPage = 3;
 
@@ -138,7 +139,7 @@ function uploadImage(req, res){
 
   if(req.files){
     const file_path = req.files.image.path;
-    const file_split = file_path.split('\\');
+    const file_split = file_path.split('\/');
     file_name = file_split[2];
     const ext_split = file_name.split('\.');
     const file_ext = ext_split[1] ;
