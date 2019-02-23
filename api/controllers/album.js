@@ -1,16 +1,16 @@
 'use strict'
 
-var path = require('path'),
-    fs = require('fs'), //Return file, in this case images
+const path = require('path');
+const fs = require('fs'); //Return file, in this case images
 
-    mongoosePaginate = require('mongoose-pagination'), //pagination module
+const mongoosePaginate = require('mongoose-pagination'); //pagination module
 
-    Artist = require('../models/artist'),
-    Album = require('../models/album'),
-    Song = require('../models/song');
+const Artist = require('../models/artist');
+const Album = require('../models/album');
+const Song = require('../models/song');
 
 function getAlbum(req, res){
-    var albumId = req.params.id;
+    const albumId = req.params.id;
 
     Album.findById(albumId).populate({path: 'artist'}).exec((err, album) => {
         if(err){
@@ -29,9 +29,10 @@ function getAlbum(req, res){
 }
 
 function saveAlbum(req, res){
-    var album = new Album(),
+    const album = new Album();
 
-        params = req.body;
+    const params = req.body;
+
         album.title = params.title;
         album.description = params.description;
         album.year = params.year;
@@ -54,14 +55,15 @@ function saveAlbum(req, res){
 }
 
 function getAlbums(req, res){
-    var artistId = req.params.artist;
+    const artistId = req.params.artist;
+    let find;
 
     if(!artistId){
       //Sacar todos los albums de la bbdd
-      var find = Album.find({}).sort('title');
+      find = Album.find({}).sort('title');
     }else{
       //Sacar los albums de un artista concreto de la base de datos
-      var find = Album.find({artist: artistId}).sort('year');
+      find = Album.find({artist: artistId}).sort('year');
     }
 
     find.populate({path: 'artist'}).exec((err, albums) => {
@@ -81,8 +83,8 @@ function getAlbums(req, res){
 }
 
 function updateAlbum(req, res){
-    var albumId = req.params.id,
-        update = req.body;
+    const albumId = req.params.id;
+    const update = req.body;
 
         Album.findByIdAndUpdate(albumId, update, (err, albumUpdated) => {
           if(err){
@@ -99,7 +101,7 @@ function updateAlbum(req, res){
 }
 
 function deleteAlbum(req, res){
-    var albumId = req.params.id;
+    const albumId = req.params.id;
 
     Album.findByIdAndRemove(albumId, (err, albumRemoved) => {
       if(err){
@@ -128,15 +130,16 @@ function deleteAlbum(req, res){
 }
 
 function uploadImage(req, res){
-  var albumId = req.params.id,
-      file_name = 'Not uploaded...';
+    const albumId = req.params.id;
+    let file_name = 'Not uploaded...';
 
   if(req.files){
-    var file_path = req.files.image.path,
-        file_split = file_path.split('\\'),
-        file_name = file_split[2],
-        ext_split = file_name.split('\.'),
-        file_ext = ext_split[1] ;
+    const file_path = req.files.image.path;
+    const file_split = file_path.split('\\');
+
+    file_name = file_split[2];
+    const ext_split = file_name.split('\.');
+    const file_ext = ext_split[1];
 
         console.log(file_name);
         console.log(file_ext);
@@ -164,7 +167,7 @@ function uploadImage(req, res){
 }
 
 function getImageFile(req, res){
-    var imageFile = req.params.imageFile,
+    const imageFile = req.params.imageFile,
         path_file = './uploads/albums/'+imageFile;
 
     fs.exists(path_file, function(exists){

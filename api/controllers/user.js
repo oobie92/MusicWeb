@@ -1,10 +1,10 @@
 'use strict'
 
-var User = require('../models/user'),
-    fs = require('fs'),
-    path = require('path'),
-    bcrypt = require('bcrypt-nodejs'),
-    jwt = require('../services/jwt');
+const User = require('../models/user');
+const fs = require('fs');
+const path = require('path');
+const bcrypt = require('bcrypt-nodejs');
+const jwt = require('../services/jwt');
 
 function test(req, res){
     res.status(200).send({
@@ -13,9 +13,9 @@ function test(req, res){
 }
 
 function saveUser(req, res){
-    var user = new User(),
+    const user = new User();
 
-        params = req.body;
+    const params = req.body;
 
         console.log(params);
         user.name = params.name;
@@ -26,7 +26,7 @@ function saveUser(req, res){
 
         if(params.password){
             //Encript pass
-            bcrypt.hash(params.password, null, null, function(err, hash){
+            bcrypt.hash(params.password, null, null, (err, hash) => {
                 user.password = hash;
                 if(user.name != null && user.surname != null
                 && user.email != null){
@@ -54,10 +54,10 @@ function saveUser(req, res){
 }
 
 function loginUser(req, res){
-    var params = req.body,
+    const params = req.body;
 
-        email = params.email,
-        password = params.password;
+    const email = params.email;
+    const password = params.password;
 
         User.findOne({email: email.toLowerCase()}, (err, user) => {
             if(err){
@@ -67,7 +67,7 @@ function loginUser(req, res){
                     res.status(404).send({message: 'User not found'});
                 }else{
                     //Compare pass
-                    bcrypt.compare(password, user.password, function(err, check){
+                    bcrypt.compare(password, user.password, (err, check) => {
                         if(check){
                             //Return users info logged in
                             if(params.gethash){
@@ -90,8 +90,8 @@ function loginUser(req, res){
 }
 
 function updateUser(req, res){
-    var userId = req.params.id,
-        update = req.body;
+    const userId = req.params.id;
+    const update = req.body;
 
         if(userId != req.user.sub){
         return res.status(500).send({message: 'Insufficient privileges'});
@@ -115,15 +115,15 @@ function updateUser(req, res){
 
 
 function uploadImage(req, res){
-  var userId = req.params.id,
-      file_name = 'Not uploaded...';
+    const userId = req.params.id;
+    let file_name = 'Not uploaded...';
 
   if(req.files){
-    var file_path = req.files.image.path,
-        file_split = file_path.split('\\'),
-        file_name = file_split[2],
-        ext_split = file_name.split('\.'),
-        file_ext = ext_split[1] ;
+    const file_path = req.files.image.path;
+    const file_split = file_path.split('\\');
+    file_name = file_split[2];
+    const ext_split = file_name.split('\.');
+    const file_ext = ext_split[1] ;
 
         console.log(file_name);
         console.log(file_ext);
@@ -150,10 +150,10 @@ function uploadImage(req, res){
 }
 
 function getImageFile(req, res){
-    var imageFile = req.params.imageFile,
-        path_file = './uploads/users/'+imageFile;
+    const imageFile = req.params.imageFile;
+    const path_file = './uploads/users/'+imageFile;
 
-    fs.exists(path_file, function(exists){
+    fs.exists(path_file, (exists) => {
         if(exists){
             res.sendFile(path.resolve(path_file));
         }else{

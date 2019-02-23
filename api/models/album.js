@@ -1,9 +1,9 @@
 'use strict'
 
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema, // This is Mongodb's model. Allows to create a collection using this schema!
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema; // This is Mongodb's model. Allows to create a collection using this schema!
 
-    AlbumSchema = Schema({
+const AlbumSchema = Schema({
         title: String,
         description: String,
         year: Number,

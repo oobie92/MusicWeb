@@ -1,12 +1,12 @@
 'use strict'
 
-var express = require('express'),
-    UserController = require('../controllers/user'),
-    md_auth = require('../Middleware/authenticated'),
-    multipart = require('connect-multiparty'), // To work this files.
-    md_upload = multipart({ uploadDir: './uploads/users' }),
+const express = require('express');
+const UserController = require('../controllers/user');
+const md_auth = require('../Middleware/authenticated');
+const multipart = require('connect-multiparty'); // To work this files.
+const md_upload = multipart({ uploadDir: './uploads/users' });
 
-    api = express.Router();
+const api = express.Router();
 
 api.get('/test-controller', md_auth.ensureAuth, UserController.test);
 api.post('/register', UserController.saveUser);

@@ -1,13 +1,13 @@
 'use strict'
 
-var express = require('express'),
-    AlbumController = require('../controllers/album'),
+const express = require('express');
+const AlbumController = require('../controllers/album');
 
-    api = express.Router(),
-    md_auth = require('../Middleware/authenticated'),
+const api = express.Router();
+const md_auth = require('../Middleware/authenticated');
 
-    multipart = require('connect-multiparty'),
-    md_upload = multipart({ uploadDir: './uploads/albums' });
+const multipart = require('connect-multiparty');
+const md_upload = multipart({ uploadDir: './uploads/albums' });
 
 api.get('/album/:id', md_auth.ensureAuth, AlbumController.getAlbum);
 api.post('/album', md_auth.ensureAuth, AlbumController.saveAlbum);

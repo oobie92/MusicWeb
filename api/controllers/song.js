@@ -1,16 +1,16 @@
 'use strict'
 
-var path = require('path'),
-    fs = require('fs'),
+const path = require('path');
+const fs = require('fs');
 
-    mongoosePaginate = require('mongoose-pagination'),
+const mongoosePaginate = require('mongoose-pagination');
 
-    Artist = require('../models/artist'),
-    Album = require('../models/album'),
-    Song = require('../models/song');
+const Artist = require('../models/artist');
+const Album = require('../models/album');
+const Song = require('../models/song');
 
 function getSong(req, res){
-  var songId = req.params.id;
+  const songId = req.params.id;
 
   Song.findById(songId).populate({path: 'album'}).exec((err, song) => {
         if(err){
@@ -27,12 +27,13 @@ function getSong(req, res){
 }
 
 function getSongs(req, res){
-    var albumId = req.params.album;
+    const albumId = req.params.album;
+    let find;
 
     if(!albumId){
-        var find = Song.find({}).sort('number');
+        find = Song.find({}).sort('number');
     }else{
-        var fing = Song.find({album: albumId}).sort('number');
+        find = Song.find({album: albumId}).sort('number');
     }
 
     find.populate({
@@ -41,7 +42,7 @@ function getSongs(req, res){
         path: 'artist',
         model: 'Artist'
       }
-    }).exec(function(err, songs){
+    }).exec((err, songs) => {
         if(err){
             res.status(500).send({message: 'Error in Server'});
         }else {
@@ -55,8 +56,8 @@ function getSongs(req, res){
 }
 
 function saveSong(req, res){
-    var song = new Song(),
-        params = req.body;
+    const song = new Song();
+    const params = req.body;
         song.number = params.number;
         song.name = params.name;
         song.duration = params.duration;
@@ -77,8 +78,8 @@ function saveSong(req, res){
 }
 
 function updateSong(req, res){
-    var songId = req.params.id,
-        update = req.body;
+    const songId = req.params.id;
+    const update = req.body;
 
         Song.findByIdAndUpdate(songId, update, (err, songUpdated) => {
           if(err){
@@ -94,7 +95,7 @@ function updateSong(req, res){
 }
 
 function deleteSong(req, res){
-    var songId = req.params.id;
+    const songId = req.params.id;
 
     Song.findByIdAndRemove(songId, (err, songRemoved) => {
       if(err){
@@ -110,15 +111,15 @@ function deleteSong(req, res){
 }
 
 function uploadFile(req, res){
-  var songId = req.params.id,
-      file_name = 'Not uploaded...';
+    const songId = req.params.id;
+    let file_name = 'Not uploaded...';
 
   if(req.files){
-    var file_path = req.files.file.path,
-        file_split = file_path.split('\\'),
-        file_name = file_split[2],
-        ext_split = file_name.split('\.'),
-        file_ext = ext_split[1] ;
+    const file_path = req.files.file.path;
+    const file_split = file_path.split('\\');
+    file_name = file_split[2];
+    const ext_split = file_name.split('\.');
+    const file_ext = ext_split[1] ;
 
         console.log(file_name);
         console.log(file_ext);
@@ -146,10 +147,10 @@ function uploadFile(req, res){
 }
 
 function getSongFile(req, res){
-    var songFile = req.params.songFile,
-        path_file = './uploads/songs/'+songFile;
+    const songFile = req.params.songFile;
+    const path_file = './uploads/songs/'+songFile;
 
-    fs.exists(path_file, function(exists){
+    fs.exists(path_file, (exists) => {
         if(exists){
             res.sendFile(path.resolve(path_file));
         }else{

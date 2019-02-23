@@ -1,16 +1,16 @@
 'use strict'
 
-var express = require('express'),
-    bodyParser = require('body-parser'),
+const express = require('express');
+const bodyParser = require('body-parser');
 
-    app = express();
+const app = express();
 
 // Load Routes
 
-var user_routes = require('./routes/user'),
-    artist_routes = require('./routes/artist'),
-    album_routes = require('./routes/album'),
-    song_routes = require('./routes/song');
+const user_routes = require('./routes/user');
+const artist_routes = require('./routes/artist');
+const album_routes = require('./routes/album');
+const song_routes = require('./routes/song');
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json()); // Converts HTTPs petitions to JSON

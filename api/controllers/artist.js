@@ -1,16 +1,16 @@
 'use strict'
 
-var path = require('path'),
-    fs = require('fs'),
+const path = require('path');
+const fs = require('fs');
 
-    mongoosePaginate = require('mongoose-pagination'),
+const mongoosePaginate = require('mongoose-pagination');
 
-    Artist = require('../models/artist'),
-    Album = require('../models/album'),
-    Song = require('../models/song');
+const Artist = require('../models/artist');
+const Album = require('../models/album');
+const Song = require('../models/song');
 
 function getArtist(req, res){
-    var artistId = req.params.id;
+    const artistId = req.params.id;
 
     Artist.findById(artistId, (err, artist) => {
         if(err){
@@ -28,11 +28,11 @@ function getArtist(req, res){
 
 function getArtists(req, res){
     if(req.params.page){
-    var page = req.params.page;
+    const page = req.params.page;
   }else{
-    var page = 1
+    const page = 1
   }
-    var  itemsPerPage = 3;
+    const  itemsPerPage = 3;
 
         Artist.find().sort('name').paginate(page, itemsPerPage, function(err, artists, total){
             if(err){
@@ -52,7 +52,7 @@ function getArtists(req, res){
 }
 
 function saveArtist(req, res){
-    var artist = new Artist(),
+    const artist = new Artist(),
 
     params = req.body;
     artist.name = params.name;
@@ -73,7 +73,7 @@ function saveArtist(req, res){
 }
 
 function updateArtist(req, res){
-    var artistId = req.params.id,
+    const artistId = req.params.id,
         update = req.body;
 
         Artist.findByIdAndUpdate(artistId, update, (err, artistUpdated) => {
@@ -92,7 +92,7 @@ function updateArtist(req, res){
 }
 
 function deleteArtist(req, res){
-    var artistId = req.params.id;
+    const artistId = req.params.id;
 
     Artist.findByIdAndRemove(artistId, (err, artistRemoved) => {
         if(err){
@@ -133,15 +133,15 @@ function deleteArtist(req, res){
 }
 
 function uploadImage(req, res){
-  var artistId = req.params.id,
-      file_name = 'Not uploaded...';
+  const artistId = req.params.id;
+  let file_name = 'Not uploaded...';
 
   if(req.files){
-    var file_path = req.files.image.path,
-        file_split = file_path.split('\\'),
-        file_name = file_split[2],
-        ext_split = file_name.split('\.'),
-        file_ext = ext_split[1] ;
+    const file_path = req.files.image.path;
+    const file_split = file_path.split('\\');
+    file_name = file_split[2];
+    const ext_split = file_name.split('\.');
+    const file_ext = ext_split[1] ;
 
         console.log(file_name);
         console.log(file_ext);
