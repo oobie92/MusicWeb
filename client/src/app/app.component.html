@@ -1,0 +1,65 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div *ngIf="identity" class="navigation col-lg-1">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+</div>
+
+<div class="clearfix"></div>
+
+<div *ngIf="identity" class="central col-lg-11">
+  <p>Estas logueado</p>
+</div>
+
+<div class="login col-lg-12" *ngIf="!identity">
+  <div class="col-lg-6">
+    <h1>
+      Sign In
+    </h1>
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit()" class="col-md-10">
+      <p>
+        <label>Email:</label>
+        <input type="text" #email="ngModel" name="email" [(ngModel)]="user.email" 
+        class="form-control" required />
+        <span *ngIf="!email.valid && email.touched">
+          Email is required!
+        </span>
+      </p>
+      <p>
+        <label>Password:</label>
+        <input type="password" #password=ngModel name="password" [(ngModel)]="user.password" 
+        class="form-control" required />
+      </p>
+
+      <input type="submit" value="Enter" class="btn btn-primary" required />
+    </form>
+  </div>
+  <div class="col-lg-6">
+    <h1>
+      Sign up
+    </h1>
+    <form class="col-md-10">
+        <p>
+          <label>Name:</label>
+          <input type="text" class="form-control" required />
+        </p>
+        <p>
+          <label>Surname:</label>
+          <input type="text" class="form-control" required />
+        </p>
+        <p>
+          <label>Email:</label>
+          <input type="text" class="form-control" required />
+        </p>
+        <p>
+          <label>Password:</label>
+          <input type="password" class="form-control" required />
+        </p>
+  
+        <input type="submit" value="Enter" class="btn btn-primary" required />
+      </form>
+  </div>
+
+</div>
+
+<router-outlet></router-outlet>

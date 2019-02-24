@@ -1,0 +1,11 @@
+body {
+  background: rgb(19, 17, 17);
+}
+
+h1, h2, p, span {
+  color: azure;
+}
+
+.login {
+  display: flex;
+}
