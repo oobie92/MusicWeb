@@ -5,21 +5,18 @@ import { map } from 'rxjs/operators';
 import { GLOBAL } from './global';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-// .pipe(map(res => res.json()))
 
 // npm i rxjs-compat -P
 
 
 @Injectable()
 export class UserService{
+  public identity;
+  public token;
   public url: string;
-  // public headers: any;
 
   constructor(private _http: HttpClient){
-
     this.url = GLOBAL.url;
-    // this.headers = new Headers({'Content-Type': 'application/json'});
-    // console.log(this.url)
   }
 
   signUp(userToLogin, getHash = null): Observable<any>{
@@ -31,11 +28,41 @@ export class UserService{
     // let headers = new Headers({'Content-Type': 'application/json'});
     let headers = new HttpHeaders({'Content-Type': 'application/json'});
 
-      // console.log(this.headers);
     return this._http.post(this.url+'login',params, {headers: headers})
-                      .pipe(map(res => {
-                        console.log('ESTA ES LA RESPUESTA: '+res)
-                        return res
-                      }));
+                      .pipe(map(res => {return res}));
+  }
+
+  register(userToRegister): Observable<any>{
+    let params: {} = JSON.stringify(userToRegister);
+
+    // let headers = new Headers({'Content-Type': 'application/json'});
+    let headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    return this._http.post(this.url+'register',params, {headers: headers})
+                      .pipe(map(res => {return res}));
+  }
+
+  getIdentity(){
+    let identity = JSON.parse(localStorage.getItem('identity'));
+
+    if(identity != "undefined") {
+      this.identity = identity;
+    } else {
+      this.identity = null;
+    }
+
+    return this.identity;
+  }
+
+  getToken(){
+    let token = localStorage.getItem('token');
+
+    if(token != "undefined") {
+      this.token = token;
+    } else {
+      this.token = null;
+    }
+
+    return this.token;
   }
 }

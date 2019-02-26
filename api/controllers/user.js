@@ -71,11 +71,14 @@ function loginUser(req, res){
                     bcrypt.compare(password, user.password, (err, check) => {
                         if(check){
                             //Return users info logged in
-                            if(body.gethash){
+                            // console.log("BODY:")
+                            // console.log(body)
+                            if(body.getHash){
                                 //Return jwt token
                                 res.status(200).send({
                                   token: jwt.createToken(user)
                                 });
+                                // console.log(token);
                             }else{
                               res.status(200).send({user});
                             }

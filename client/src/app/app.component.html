@@ -3,6 +3,13 @@
   <h1>
     Welcome to {{ title }}!
   </h1>
+  <span>
+    {{identity.name}} {{identity.surname}}
+  </span>
+  <br>
+  <span class="btn btn-warning" (click)="logOut()">
+    Close session
+  </span>
 </div>
 
 <div class="clearfix"></div>
@@ -16,6 +23,11 @@
     <h1>
       Sign In
     </h1>
+    <div *ngIf="alertRegister">
+      <div class="alert alert-info" role="alert">
+        {{alertRegister}}
+      </div>
+    </div>
     <form #loginForm="ngForm" (ngSubmit)="onSubmit()" class="col-md-10">
       <p>
         <label>Email:</label>
@@ -38,22 +50,39 @@
     <h1>
       Sign up
     </h1>
-    <form class="col-md-10">
+    <div *ngIf="errMsj">
+      <div class="alert alert-info" role="alert">
+        <strong>Error</strong> {{errMsj}}
+      </div>
+    </div>
+    <form #registerForm="ngForm" (ngSubmit)="onSubmitRegister()" class="col-md-10">
         <p>
           <label>Name:</label>
-          <input type="text" class="form-control" required />
+          <input type="text" #name="ngModel" name="name" [(ngModel)]="userRegister.name" class="form-control" required />
+          <span *ngIf="!name.valid && name.touched">
+            Name is required!
+          </span>
         </p>
         <p>
           <label>Surname:</label>
-          <input type="text" class="form-control" required />
+          <input type="text" #surname="ngModel" name="surname" [(ngModel)]="userRegister.surname" class="form-control" required />
+          <span *ngIf="!surname.valid && surname.touched">
+            Surname is required!
+          </span>
         </p>
         <p>
           <label>Email:</label>
-          <input type="text" class="form-control" required />
+          <input type="text" #email="ngModel" name="email" [(ngModel)]="userRegister.email"  class="form-control" required />
+          <span *ngIf="!email.valid && email.touched">
+            Email is required!
+          </span>
         </p>
         <p>
           <label>Password:</label>
-          <input type="password" class="form-control" required />
+          <input type="password" #password=ngModel name="password" [(ngModel)]="userRegister.password"  class="form-control" required />
+          <span *ngIf="!password.valid && password.touched">
+            Password is required!
+          </span>
         </p>
   
         <input type="submit" value="Enter" class="btn btn-primary" required />
