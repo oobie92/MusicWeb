@@ -1,9 +1,78 @@
-body {
-  background: rgb(19, 17, 17);
+html, body {
+  background: #6e6e70;
+  margin: 0px;
+  height: 100%;
+  /* display: flex; */
 }
 
 h1, h2, p, span {
   color: azure;
+}
+
+.head-title {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  display: block;
+}
+
+.navigation {
+  text-align: center;
+  color: white;
+  background: rgb(19, 17, 17);
+  top: -20px;
+  padding-top: 15px;
+  height: 104%;
+}
+
+.navigation a {
+  color: #ddd;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: block;
+  text-decoration: none;
+}
+
+.navigation a:hover {
+  color: white;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: block;
+  text-decoration: none;
+}
+
+.navigation .fas {
+  font-size: 25px;
+  display: block;
+  width: 100%;
+}
+
+#user_logged {
+  text-decoration: center;
+  background: rgb(19, 17, 17);
+  position: absolute;
+  bottom: 0px;
+  border-top: 1px solid #444;
+  width: 75%;
+}
+  
+.btn-signout{
+  cursor: pointer;
+}
+
+#user_logged .user-image {
+  background: #eee;
+  border-radius: 100px;
+  height: 57px;
+  width: 57px;
+  margin: 0px auto;
+  margin-top: 15px;
+  overflow: hidden;
+}
+
+#user_logged .user-image {
+  width: 57px;
 }
 
 .login {

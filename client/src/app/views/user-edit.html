@@ -1,0 +1,52 @@
+<div class="col-lg-6" *ngIf="identity">
+  <hr/>
+  <h1 style="color:white">{{title}}</h1>
+  <!-- Form -->
+  <div *ngIf="alertUpdate">
+    <div class="alert alert-info" role="alert">
+      {{alertUpdate}}
+    </div>
+  </div>
+  <form #userUpdateForm="ngForm" (ngSubmit)="onSubmit()" class="col-md-10">
+    <p>
+      <label>Name:</label>
+      <input type="text" #name="ngModel" name="name" [(ngModel)]="user.name" class="form-control" required />
+      <span *ngIf="!name.valid && name.touched">
+        Name is required!
+      </span>
+    </p>
+    <p>
+      <label>Surname:</label>
+      <input type="text" #surname="ngModel" name="surname" [(ngModel)]="user.surname" class="form-control" required />
+      <span *ngIf="!surname.valid && surname.touched">
+        Surname is required!
+      </span>
+    </p>
+    <p>
+      <label>Email:</label>
+      <input type="text" #email="ngModel" name="email" [(ngModel)]="user.email"  class="form-control" required />
+      <span *ngIf="!email.valid && email.touched">
+        Email is required!
+      </span>
+    </p>
+    <!-- <p>
+      <label>Password:</label>
+      <input type="password" #password=ngModel name="password" [(ngModel)]="user.password"  class="form-control" required />
+      <span *ngIf="!password.valid && password.touched">
+        Password is required!
+      </span>
+    </p> -->
+
+    <div class="image_for_edit" *ngIf="user.image && user.imgae != 'null'">
+      <img src="{{url + 'get-image-user/' + user.image}}" style="width: 150px"/>
+    </div>
+
+    <p>
+      <label >Upload image: </label>
+      <br>
+      <input type="file" placeholder="upload image..." (change)="fileChangeEvent($event)">
+    </p>
+
+    <input type="submit" value="Enter" class="btn btn-primary" required />
+  </form>
+</div>

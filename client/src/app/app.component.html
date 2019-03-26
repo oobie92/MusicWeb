@@ -1,24 +1,58 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div *ngIf="identity" class="navigation col-lg-1">
-  <h1>
-    Welcome to {{ title }}!
+  <h1 class="head-title">
+    <a [routerLink]="['/']">
+      <span class="fas fa-music" aria-hidden="true"></span>
+      {{ title }}
+    </a>
   </h1>
-  <span>
-    {{identity.name}} {{identity.surname}}
-  </span>
-  <br>
-  <span class="btn btn-warning" (click)="logOut()">
-    Close session
-  </span>
+  <nav id="navigation">
+    <a href="#"> 
+        <span class="fas fa-search" aria-hidden="true"></span>
+        Buscar
+    </a>
+    <a href="#"> 
+        <span class="fas fa-star" aria-hidden="true"></span>
+        Artits
+    </a>
+    <a href="#"> 
+        <span class="fas fa-book" aria-hidden="true"></span>
+        Albums
+    </a>
+    <a href="#"> 
+        <span class="fas fa-compact-disc" aria-hidden="true"></span>
+        Songs
+    </a>
+  </nav>
+
+  <nav id="user_logged">
+      <div class="user-image">
+          <img id="image-logged" src="{{url + 'get-image-user/' + identity.image}}"/>
+        </div>
+    <span id="identity_name">
+      {{identity.name}} 
+    </span>
+    <br>
+
+    <span>
+      <a [routerLink]="['/my-info']" > 
+        <span class="fas fa-cog" aria-hidden="true"></span>
+        My Info
+      </a>
+      <a (click)="logOut()" class="btn-signout"> 
+        <span class="fas fa-sign-out-alt" aria-hidden="true"></span>
+        Sign out
+      </a>
+    </span>
+  </nav>
 </div>
 
-<div class="clearfix"></div>
 
 <div *ngIf="identity" class="central col-lg-11">
-  <p>Estas logueado</p>
+  <router-outlet></router-outlet>
 </div>
 
-<div class="login col-lg-12" *ngIf="!identity">
+<div class="login col-lg-10" *ngIf="!identity">
   <div class="col-lg-6">
     <h1>
       Sign In
