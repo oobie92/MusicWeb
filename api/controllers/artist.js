@@ -85,7 +85,7 @@ function updateArtist(req, res){
                     res.status(404).send({message: 'Artist not updated'});
                 }else{
 
-                    res.status(200).send({artist: artistStored});
+                    res.status(200).send({artist: artistUpdated});
                 }
             }
         });

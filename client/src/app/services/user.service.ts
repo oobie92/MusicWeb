@@ -38,7 +38,7 @@ export class UserService{
     // let headers = new Headers({'Content-Type': 'application/json'});
     let headers = new HttpHeaders({'Content-Type': 'application/json'});
 
-    return this._http.post(this.url+'register',params, {headers: headers})
+    return this._http.post(this.url+'register',params, { headers })
                       .pipe(map(res => {return res}));
   }
 

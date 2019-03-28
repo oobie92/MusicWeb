@@ -9,6 +9,11 @@ h1, h2, p, span {
   color: azure;
 }
 
+.actived {
+  border-bottom: 4px solid #84bd00;
+  padding-bottom: 4px;
+}
+
 .head-title {
   font-size: 20px;
   font-weight: bold;
@@ -77,4 +82,8 @@ h1, h2, p, span {
 
 .login {
   display: flex;
+}
+
+.artist_image_for_edit img{
+  width: 170px;
 }
