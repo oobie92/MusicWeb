@@ -54,12 +54,9 @@ export class ArtistEditComponent implements OnInit {
 
 
           if (!response.artist) {
-            console.log("ala mierdad")
             this._router.navigate(['/']);
           } else {
             this.artist = response.artist;
-            console.log('ARTIST!!!!')
-            console.log(this.artist)
           }
         },
         error => {

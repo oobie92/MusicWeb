@@ -25,7 +25,7 @@ export class ArtistAddComponent implements OnInit {
     private _router: Router,
     private _userService: UserService,
     private _artistService: ArtistService
-  ){
+  ) {
     this.title = 'Create new artist'
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
@@ -33,18 +33,18 @@ export class ArtistAddComponent implements OnInit {
     this.artist = new Artist('', '', '');
   }
 
-  ngOnInit(){
+  ngOnInit() {
     console.log('Artist add component.ts loaded');
 
     // List of artists
   }
 
-  onSubmit(){
+  onSubmit() {
     console.log(this.artist)
     this._artistService.addArtist(this.token, this.artist).subscribe(
       response => {
-        
-        if(!response.artist){
+
+        if (!response.artist) {
           alert('Error!!!');
           this.alertMsj = 'Error, something went wrong'
         } else {
@@ -53,14 +53,14 @@ export class ArtistAddComponent implements OnInit {
           console.log(this.artist)
           this.alertMsj = 'Artist has been created successfully!'
           console.log(this.alertMsj)
-          // this._router.navigate(['./edit-artist'], response.artist._id);
+          this._router.navigate(['./edit-artist', response.artist._id]);
 
         }
       },
       error => {
         let err = <any>error;
         this.alertMsj = err.error.message;
-        if(this.alertMsj != null) console.log(this.alertMsj)
+        if (this.alertMsj != null) console.log(this.alertMsj)
       }
     );
   }

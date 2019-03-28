@@ -9,6 +9,16 @@ h1, h2, p, span {
   color: azure;
 }
 
+.central {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.confirm {
+  margin-top: -40px;
+  background: black;
+}
+
 .actived {
   border-bottom: 4px solid #84bd00;
   padding-bottom: 4px;
@@ -86,4 +96,53 @@ h1, h2, p, span {
 
 .artist_image_for_edit img{
   width: 170px;
+}
+
+.artists-list {
+  margin: 0px;
+  padding: 0px;
+  margin-top: 30px;
+  list-style: none;
+}
+
+.artist-item {
+  width: 23%;
+  margin: 0px;
+  padding: 0px;
+  height: 117px;
+  border: 1px solid #444;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.artist-item .artist-image{
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+} 
+
+.artist-item .artist-image img{
+  width: 100%;
+}
+
+.artist-item .artist-name a{
+  color: white;
+  padding: 10px;
+  background: #222326;
+}
+
+.artist-item .artist-name a{
+  color: white;
+}
+
+#artist-head-card .image {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  float: left;
+  margin-right: 30px; 
+}
+
+#artist-head-card .image img {
+  width: 150px;
 }
