@@ -1,19 +1,49 @@
 <div *ngIf="artist" class="artist-box">
   <div id="artist-head-card">
     <div class="artist-image">
-      <img src="{{url + 'get-image-artist/' + artist.image}}" *ngIf="artist.image && artist.image != 'null'"/>
+      <img src="{{url + 'get-image-artist/' + artist.image}}" *ngIf="artist.image && artist.image != 'null'" />
     </div>
     <div class="data">
       <h1>{{artist.name}}</h1>
       <p class="description">{{artist.description}}</p>
 
-      <a *ngIf="identity.role == 'ROLE_ADMIN'" href="#" class="btn btn-dark">Add album</a>
-      </div>
+      <a *ngIf="identity.role == 'ROLE_ADMIN'" [routerLink]="['/create-album', artist._id]" class="btn btn-dark">Add
+        album</a>
+    </div>
   </div>
 
   <div class="clearfix visible-lg-block"></div>
 
   <div id="galery-albums" *ngIf="albums">
     <!-- List albums -->
+    <ul class="album-list">
+      <li *ngFor="let album of albums" class="col-lg-4 album-item">
+        <div class="album-image">
+          <img src="{{ url + 'get-image-album/' + album.image }}" />
+        </div>
+        <div class="album-name">
+          <p>
+            <a [routerLink]="['/album', album._id]">
+              {{album.title}}
+            </a>
+            <a [routerLink]="['/artist', album.artist._id]">
+              {{album.artist.name}}
+            </a>
+          </p>
+        </div>
+        <div class="buttons" *ngIf="identity.role == 'ROLE_ADMIN'">
+            <a [routerLink]="['/edit-album', album._id]" class="btn btn-sm btn-warning">Edit album</a>
+        </div>
+  
+        <div class="buttons" *ngIf="identity.role == 'ROLE_ADMIN'">
+            <a (click)="onDeleteConfirm(album._id)" class="btn btn-sm btn-danger">Delete album</a>
+        </div>
+  
+        <div class="confirm" *ngIf="confirm == album._id">
+              <a (click)="onDeleteAlbum(album._id)" class="btn btn-sm btn-danger">Confirm</a>
+              <a (click)="onCancelAlbum()" class="btn btn-sm btn-light">Cancel</a>
+        </div>
+      </li>
+    </ul>
   </div>
 </div>

@@ -14,6 +14,7 @@ function getAlbum(req, res){
 
     Album.findById(albumId).populate({path: 'artist'}).exec((err, album) => {
         if(err){
+            console.log(err)
             res.status(500).send({message: 'Error! Something went wrong'});
         }else {
 
@@ -135,7 +136,8 @@ function uploadImage(req, res){
 
   if(req.files){
     const file_path = req.files.image.path;
-    const file_split = file_path.split('\\');
+    const file_split = file_path.split('\/');
+
 
     file_name = file_split[2];
     const ext_split = file_name.split('\.');
@@ -146,7 +148,7 @@ function uploadImage(req, res){
         if(file_ext.toLowerCase() == 'png' || file_ext == 'jpg' || file_ext == 'gif'){
             Album.findByIdAndUpdate(albumId, {image: file_name}, (err, albumUpdated) => {
               if(!albumUpdated){
-                res.status(404).send({message: "Couldn't update user"});
+                res.status(404).send({message: "Couldn't update Album"});
               }else{
                 res.status(200).send({album: albumUpdated});
               }

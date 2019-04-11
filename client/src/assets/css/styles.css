@@ -98,7 +98,12 @@ h1, h2, p, span {
   width: 170px;
 }
 
-.artists-list {
+.album_image_for_edit img{
+  width: 170px;
+}
+
+.artists-list,
+.album-list {
   margin: 0px;
   padding: 0px;
   margin-top: 30px;
