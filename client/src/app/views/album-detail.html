@@ -5,12 +5,43 @@
     </div>
     <div class="data">
       <h1>{{album.title}}</h1>
+      <p>{{album.artist.name}}</p>
       <p>{{album.year}}</p>
       <p>{{album.description}}</p>
 
-      <a href="#" class="btn btn-info" *ngIf="identity.role == 'ROLE_ADMIN'">
+      <a [routerLink]="['/create-song', album._id]" class="btn btn-info" *ngIf="identity.role == 'ROLE_ADMIN'">
         Add song
       </a>
     </div>
+  </div>
+  <div class="clearfix"></div>
+  <div id="gallery-songs" *ngIf="songs">
+    <ul id="songs-list">
+      <li *ngFor="let song of songs" class="song-item">
+        <div class="title">
+          <a class="btn btn-success" >
+            <span class="fas fa-play-circle" aria-hidden="true"></span>
+          </a>
+
+          {{ song.number + '. ' + song.name + ' - ' + song.duration }}
+
+          <div class="buttons" *ngIf="identity.role == 'ROLE_ADMIN'">
+            <a [routerLink]="['/edit-song', song._id]" class="btn btn-warning">
+              Edit
+            </a>
+          </div>
+
+          <div class="buttons" *ngIf="identity.role == 'ROLE_ADMIN'">
+            <a (click)="onDeleteConfirm(song._id)" class="btn btn-sm btn-danger">Delete song</a>
+          </div>
+      
+          <div class="confirm" *ngIf="_confirm == song._id">
+            <a (click)="onDeleteSong(song._id)" class="btn btn-sm btn-danger">Confirm</a>
+            <a (click)="onCancelSong()" class="btn btn-sm btn-light">Cancel</a>
+          </div>
+
+        </div>
+      </li>
+    </ul>
   </div>
 </div>
